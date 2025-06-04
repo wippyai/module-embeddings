@@ -15,7 +15,28 @@
 
 </div>
 
-{description}
+Text embedding library that converts text into vector representations.
+Part of the unified LLM interface, supporting multiple providers and models.
+
+## Usage
+
+```lua
+local llm = require("llm")
+
+-- Single text
+local response = llm.embed("Text to embed", {
+    model = "text-embedding-3-large"
+})
+
+-- Multiple texts
+local texts = {"Text 1", "Text 2"}
+local response = llm.embed(texts, {
+    model = "text-embedding-3-large",
+    dimensions = 1536
+})
+```
+
+Used for semantic search, document similarity, and applications requiring text vector representations.
 
 [wippy-documentation]: https://docs.wippy.ai
 [releases-page]: https://github.com/wippyai/module-embeddings/releases
