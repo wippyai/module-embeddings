@@ -1,7 +1,6 @@
 local sql = require("sql")
 local json = require("json")
 local uuid = require("uuid")
-local time = require("time")
 
 -- Constants
 local DB_RESOURCE = "app:db"

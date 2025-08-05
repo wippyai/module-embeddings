@@ -257,7 +257,7 @@ function embeddings.search(query_text, options)
     end
 
     -- Call repository search with the generated embedding
-    return embedding_repo.search_by_embedding(embedding, {
+    return embedding_repo.search_by_embedding(embedding[1], {
         content_type = options.content_type,
         origin_id = options.origin_id,
         context_id = options.context_id,
