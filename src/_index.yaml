@@ -2,6 +2,29 @@ version: "1.0"
 namespace: wippy.embeddings
 
 entries:
+  # Dependencies
+  - name: __dependency.wippy.llm
+    kind: "ns.dependency"
+    meta:
+      description: "LLM component"
+    component: "wippy/llm"
+    version: ">=v0.0.7"
+
+  - name: __dependency.wippy.migration
+    kind: "ns.dependency"
+    meta:
+      description: "Migration component"
+    component: "wippy/migration"
+    version: ">=v0.0.7"
+
+  - name: __dependency.wippy.test
+    kind: "ns.dependency"
+    meta:
+      description: "Testing component"
+    component: "wippy/test"
+    version: ">=v0.0.7"
+
+
   # wippy.embeddings:embedding_repo
   - name: embedding_repo
     kind: library.lua
@@ -21,7 +44,7 @@ entries:
       - json
       - uuid
       - time
-    
+
   # wippy.embeddings:embedding_repo_test
   - name: embedding_repo_test
     kind: function.lua
@@ -45,7 +68,7 @@ entries:
       embedding_repo: wippy.embeddings:embedding_repo
       test: wippy.test:test
     method: run_tests
-    
+
   # wippy.embeddings:embeddings
   - name: embeddings
     kind: library.lua
@@ -64,4 +87,3 @@ entries:
     imports:
       embedding_repo: wippy.embeddings:embedding_repo
       llm: wippy.llm:llm
-    
