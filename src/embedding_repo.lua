@@ -1,18 +1,39 @@
 local sql = require("sql")
 local json = require("json")
 local uuid = require("uuid")
+local ctx = require("ctx")
 
 -- Constants
-local DB_RESOURCE = "app:db"
 local DEFAULT_SEARCH_LIMIT = 10
 
 local embedding_repo = {}
 
+-- Helper function to get database resource ID from context
+local function get_database_resource()
+    -- Get database resource from context (injected by dependency system)
+    local ctx_data, err = ctx.all()
+    if err then
+        return nil, "Failed to get context data: " .. err
+    end
+    
+    -- Check if target_db was injected via dependency injection
+    if ctx_data and ctx_data.target_db then
+        return ctx_data.target_db, nil
+    end
+    
+    return nil, "Database resource not configured. Please ensure APP_DB is defined in your application configuration."
+end
+
 -- Helper function to get database connection
 local function get_db()
-    local db, err = sql.get(DB_RESOURCE)
+    local db_resource, err = get_database_resource()
     if err then
-        return nil, "Failed to connect to database: " .. err
+        return nil, err
+    end
+    
+    local db, db_err = sql.get(db_resource)
+    if db_err then
+        return nil, "Failed to connect to database: " .. db_err
     end
     return db
 end

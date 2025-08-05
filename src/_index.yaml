@@ -24,6 +24,16 @@ entries:
     component: "wippy/test"
     version: ">=v0.0.7"
 
+  # Requirements
+  - name: APP_DB
+    kind: ns.requirement
+    meta:
+      description: "Application database resource identifier"
+    targets:
+      - entry: embedding_repo
+        path: .meta.target_db
+      - entry: wippy.embeddings.migrations:01_create_embeddings_table
+        path: ".meta.target_db"
 
   # wippy.embeddings:embedding_repo
   - name: embedding_repo
