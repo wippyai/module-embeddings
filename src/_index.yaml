@@ -2,6 +2,17 @@ version: "1.0"
 namespace: wippy.embeddings
 
 entries:
+  # Requirements
+  - name: target_db
+    kind: ns.requirement
+    meta:
+      description: "Application database ID"
+    targets:
+      - entry: wippy.embeddings.migrations:01_create_embeddings_table
+        path: ".meta.target_db"
+      - entry: target_db
+        path: ".default"
+
   # Dependencies
   - name: __dependency.wippy.llm
     kind: "ns.dependency"
@@ -24,6 +35,20 @@ entries:
     component: "wippy/test"
     version: ">=v0.0.7"
 
+  # wippy.embeddings:envs
+  - name: envs
+    kind: env.storage.os
+    meta:
+      type: envstorage
+      comment: OS storage for environment variables
+
+  # wippy.embeddings:target_db
+  - name: target_db
+    kind: env.variable
+    meta:
+      type: config_key
+      comment: Database resource identifier
+    storage: wippy.embeddings:envs
 
   # wippy.embeddings:embedding_repo
   - name: embedding_repo
