@@ -2,15 +2,6 @@ version: "1.0"
 namespace: wippy.embeddings.migrations
 
 entries:
-  # Requirements
-  - name: app_db
-    kind: ns.requirement
-    meta:
-      description: "Application database ID"
-    targets:
-      - entry: 01_create_embeddings_table
-        path: ".meta.target_db"
-
   # wippy.embeddings.migrations:01_create_embeddings_table
   - name: 01_create_embeddings_table
     kind: function.lua

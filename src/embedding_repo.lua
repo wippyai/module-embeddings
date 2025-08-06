@@ -1,9 +1,10 @@
 local sql = require("sql")
 local json = require("json")
 local uuid = require("uuid")
+local env = require("env")
 
 -- Constants
-local DB_RESOURCE = "app:db"
+local DB_RESOURCE, _ = env.get("wippy.embeddings:target_db")
 local DEFAULT_SEARCH_LIMIT = 10
 
 local embedding_repo = {}
