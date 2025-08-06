@@ -3,7 +3,7 @@ namespace: wippy.embeddings
 
 entries:
   # Requirements
-  - name: target_db
+  - name: requirement-target_db
     kind: ns.requirement
     meta:
       description: "Application database ID"
