@@ -30,7 +30,7 @@ local function define_tests()
 
         -- Clean up after all tests
         after_all(function()
-            local db_resource, _ = env.get("wippy.embeddings:target_db")
+            local db_resource, _ = env.get("wippy.embeddings:env-target_db")
             local db, err = sql.get(db_resource)
             if err then
                 print("Warning: Could not connect to database for cleanup: " .. err)

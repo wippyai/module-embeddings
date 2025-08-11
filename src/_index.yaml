@@ -3,14 +3,14 @@ namespace: wippy.embeddings
 
 entries:
   # Requirements
-  - name: requirement-target_db
+  - name: target_db
     kind: ns.requirement
     meta:
       description: "Application database ID"
     targets:
       - entry: wippy.embeddings.migrations:01_create_embeddings_table
         path: ".meta.target_db"
-      - entry: target_db
+      - entry: env-target_db
         path: ".default"
 
   # Dependencies
@@ -42,8 +42,8 @@ entries:
       type: envstorage
       comment: OS storage for environment variables
 
-  # wippy.embeddings:target_db
-  - name: target_db
+  # wippy.embeddings:env-target_db
+  - name: env-target_db
     kind: env.variable
     meta:
       type: config_key
