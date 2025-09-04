@@ -68,6 +68,7 @@ entries:
       - json
       - uuid
       - time
+      - env
 
   # wippy.embeddings:embedding_repo_test
   - name: embedding_repo_test
@@ -86,6 +87,7 @@ entries:
       - sql
       - uuid
       - json
+      - env
     imports:
       embedding_repo: wippy.embeddings:embedding_repo
       test: wippy.test:test
