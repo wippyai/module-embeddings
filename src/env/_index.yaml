@@ -16,4 +16,4 @@ entries:
       type: config_key
       comment: Database resource identifier
       private: true
-    storage: wippy.embeddings.migrations:envs
+    storage: wippy.embeddings.env:envs
