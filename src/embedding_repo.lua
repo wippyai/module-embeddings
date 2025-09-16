@@ -10,7 +10,7 @@ local embedding_repo = {}
 
 -- Helper function to get database connection
 local function get_db()
-    local DB_RESOURCE, _ = env.get("wippy.embeddings:env-target_db")
+    local DB_RESOURCE, _ = env.get("wippy.embeddings.env:target_db")
 
     local db, err = sql.get(DB_RESOURCE)
     if err then
