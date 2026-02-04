@@ -494,7 +494,7 @@ function embedding_repo.search_by_embedding(embedding, options)
             if type(origin_id) ~= "table" then
                 origin_id = { origin_id }
             end
-            local placeholders = {}
+            local placeholders = table.create(#origin_id, 0)
             for i = 1, #origin_id do
                 table.insert(placeholders, "?")
             end
@@ -534,7 +534,7 @@ function embedding_repo.search_by_embedding(embedding, options)
             if type(origin_id) ~= "table" then
                 origin_id = { origin_id }
             end
-            local placeholders = {}
+            local placeholders = table.create(#origin_id, 0)
             for i = 1, #origin_id do
                 table.insert(placeholders, "?")
                 table.insert(params, origin_id[i])
