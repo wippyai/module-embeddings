@@ -491,7 +491,17 @@ function embedding_repo.search_by_embedding(embedding, options)
         end
 
         if origin_id then
-            select_builder = select_builder:where("origin_id = ?", origin_id)
+            if type(origin_id) ~= "table" then
+                origin_id = { origin_id }
+            end
+            local placeholders = {}
+            for i = 1, #origin_id do
+                table.insert(placeholders, "?")
+            end
+            local unpack = table.unpack or unpack
+            select_builder = select_builder:where(
+                sql.builder.expr("origin_id IN (" .. table.concat(placeholders, ",") .. ")", unpack(origin_id))
+            )
         end
 
         if context_id then
@@ -521,8 +531,15 @@ function embedding_repo.search_by_embedding(embedding, options)
 
         -- Add origin_id filter if provided (use origin_id_aux for SQLite)
         if origin_id then
-            table.insert(query_conditions, "origin_id_aux = ?")
-            table.insert(params, origin_id)
+            if type(origin_id) ~= "table" then
+                origin_id = { origin_id }
+            end
+            local placeholders = {}
+            for i = 1, #origin_id do
+                table.insert(placeholders, "?")
+                table.insert(params, origin_id[i])
+            end
+            table.insert(query_conditions, "origin_id_aux IN (" .. table.concat(placeholders, ",") .. ")")
         end
 
         -- Add context_id filter if provided

@@ -168,6 +168,37 @@ local function define_tests()
             end
         end)
 
+        -- Test filtering by origin_id as an array
+        it("should filter search results by origin_id as array", function()
+            local query_embedding = embedding_1
+
+            -- Search with both origin_ids as a table
+            local results, err = embedding_repo.search_by_embedding(query_embedding, {
+                origin_id = { origin_id_1, origin_id_2 }
+            })
+
+            expect(err).to_be_nil()
+            expect(results).not_to_be_nil()
+
+            -- All results should have either origin_id_1 or origin_id_2
+            for _, result in ipairs(results) do
+                local matches = (result.origin_id == origin_id_1) or (result.origin_id == origin_id_2)
+                expect(matches).to_be_true()
+            end
+
+            -- Search with only one origin_id in a table (should work same as string)
+            results, err = embedding_repo.search_by_embedding(query_embedding, {
+                origin_id = { origin_id_1 }
+            })
+
+            expect(err).to_be_nil()
+            expect(results).not_to_be_nil()
+
+            for _, result in ipairs(results) do
+                expect(result.origin_id).to_equal(origin_id_1)
+            end
+        end)
+
         -- Test filtering by content_type
         it("should filter search results by content_type", function()
             -- Search for any content with content_type = filter_test_document
